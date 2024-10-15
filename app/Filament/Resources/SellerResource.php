@@ -22,6 +22,8 @@ class SellerResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'Management';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -73,6 +75,10 @@ class SellerResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                
+                Tables\Actions\ViewAction::make(),
+                
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

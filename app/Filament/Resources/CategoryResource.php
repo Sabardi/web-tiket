@@ -6,9 +6,13 @@ use App\Filament\Resources\CategoryResource\Pages;
 use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Models\Category;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -19,18 +23,20 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'Management';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 //
-                Forms\Components\TextInput::make('name')
-                ->label('Category Name')
-                ->required(),
+                TextInput::make('name')
+                    ->label('Category Name')
+                    ->required(),
 
-                Forms\Components\FileUpload::make('icon')
-                ->label('icon')
-                ->required(),
+                FileUpload::make('icon')
+                    ->image()
+                    ->required(),
             ]);
     }
 
@@ -38,17 +44,24 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                ->searchable(),
+                TextColumn::make('name')
+                    ->searchable(),
 
-            Tables\Columns\ImageColumn::make('icon')
-                ->circular(),
+                TextColumn::make('slug')
+                    ->searchable(),
+
+                    ImageColumn::make('icon')
+                    ->circular()
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+
+                Tables\Actions\ViewAction::make(),
+
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
