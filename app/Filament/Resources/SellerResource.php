@@ -5,7 +5,10 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\SellerResource\Pages;
 use App\Filament\Resources\SellerResource\RelationManagers;
 use App\Models\Seller;
+use Faker\Provider\ar_EG\Text;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -24,6 +27,21 @@ class SellerResource extends Resource
         return $form
             ->schema([
                 //
+                TextInput::make('name')
+                ->required()
+                ->maxLength(255),
+
+                TextInput::make('telephone')
+                ->required()
+                ->maxLength(255),
+
+                TextInput::make('location')
+                ->required()
+                ->maxLength(255),
+
+                FileUpload::make('photo')
+                ->required()
+                ->image(),
             ]);
     }
 
@@ -31,7 +49,24 @@ class SellerResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')
+                ->label('Name')
+                ->sortable()
+                ->searchable(),
+
+            Tables\Columns\TextColumn::make('telephone')
+                ->label('Telephone')
+                ->sortable()
+                ->searchable(),
+
+            Tables\Columns\TextColumn::make('location')
+                ->label('Location')
+                ->sortable()
+                ->searchable(),
+
+            Tables\Columns\ImageColumn::make('photo')
+                ->label('Photo')
+                ->circular(),
             ])
             ->filters([
                 //
