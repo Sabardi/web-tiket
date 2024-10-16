@@ -2,19 +2,35 @@
 
 namespace App\Http\Controllers;
 
-// use App\Models\Category;
-// use App\Models\Ticket;
+use App\Models\Category;
+use App\Models\Ticket;
+use App\Services\frontService;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
 
-    // konsep mvcp
-    // public function index()
-    // {
-    //     $categories = Category::latest()->get();
-    //     $popular_tickets = Ticket::where('is_popular', true)->take(4)->get();
-    //     $new_tickets = Ticket::latest()->get();
-    //     return view('front.index', compact('categories', 'popular_tickets', 'new_tickets'));
-    // }
+    protected $frontService;
+
+    public function __construct(frontService $frontService)
+    {
+        $this->frontService = $frontService;
+    }
+
+    public function index()
+    {
+        $data = $this->frontService->getFrontPageData();
+        return $data;
+    }
+    
+    // model binding
+    public function details(Ticket $ticket)
+    {
+        return $ticket;
+    }
+
+    public function category(Category $category)
+    {
+        return $category;
+    }
 }
