@@ -26,7 +26,7 @@
                                         <div>
                                             <h3 class="font-bold text-white">{{ $popularTicket->name }}</h3>
                                             <p class="text-sm leading-[18px] text-white">
-                                                {{ $popularTicket->category }}</p>
+                                                {{ $popularTicket->category->name }}</p>
                                         </div>
 
                                         {{-- tidak perlu di ubah untuk image nya --}}
