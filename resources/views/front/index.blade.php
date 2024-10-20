@@ -26,7 +26,7 @@
                                         <div>
                                             <h3 class="font-bold text-white">{{ $popularTicket->name }}</h3>
                                             <p class="text-sm leading-[18px] text-white">
-                                                {{ $popularTicket->category->name }}</p>
+                                                {{ $popularTicket->category }}</p>
                                         </div>
 
                                         {{-- tidak perlu di ubah untuk image nya --}}
@@ -54,7 +54,7 @@
                 <div class="swiper-wrapper">
                     @forelse ($categories as $category)
                         <div class="swiper-slide !w-fit">
-                            <a href="" class="card">
+                            <a href="{{ route('front.category', $category->slug) }}" class="card">
                                 <div
                                     class="flex items-center w-fit rounded-full text-nowrap p-[14px_20px] gap-[10px] bg-[#F8F8F9]">
                                     <img src="{{ Storage::url($category->icon) }}" class="w-6 h-6" alt="icon">
@@ -118,7 +118,7 @@
                                             {{ $newTicket->seller->name }}</p>
                                     </div>
                                     <p class="font-bold text-sm leading-[21px] text-[#F97316]">
-                                        Rp.{{ number_format($newTicket->price, 0, '.', '.') }} </p>
+                                        {{ formatRupiah($newTicket->price) }} </p>
                                 </div>
                             </div>
                             <p class="w-fit flex shrink-0 items-center gap-[2px] rounded-full p-[6px_8px] bg-[#FFE5D3]">
@@ -141,9 +141,8 @@
                 <a href="index.html" class="menu">
                     <div class="group flex flex-col items-center text-center gap-[10px]">
                         <div class="w-6 h-6 flex shrink-0">
-                            <svg class="transition-all duration-300 group-hover:fill-[#F97316]  fill-current"
-                                width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
+                            <svg class="transition-all duration-300 group-hover:fill-[#F97316]  fill-current" width="24"
+                                height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path opacity="0.4"
                                     d="M7.65 20.91C7.62 20.91 7.58 20.93 7.55 20.93C5.61 19.97 4.03 18.38 3.06 16.44C3.06 16.41 3.08 16.37 3.08 16.34C4.3 16.7 5.56 16.97 6.81 17.18C7.03 18.44 7.29 19.69 7.65 20.91Z" />
                                 <path opacity="0.4"

@@ -5,6 +5,9 @@ use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
+// route::get('/tes', function () {
+//     return view('front.category');
+// })->name('front.tes');
 
 Route::get('/browse/{category:slug}', [FrontController::class, 'category'])->name('front.category');
 Route::get('/details/{ticket:slug}', [FrontController::class, 'details'])->name('front.details');
