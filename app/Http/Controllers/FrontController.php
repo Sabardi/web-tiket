@@ -27,11 +27,13 @@ class FrontController extends Controller
     // model binding
     public function details(Ticket $ticket)
     {
-        return $ticket;
+        // return $ticket;
+        return view('front.details', compact('ticket'));  
     }
 
     public function category(Category $category)
     {
         return $category;
     }
+
 }
