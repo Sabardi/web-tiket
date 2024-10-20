@@ -22,11 +22,11 @@ class frontService
 
     public function getFrontPageData()
     {
+        $popularTickets = $this->ticketRepository->getPopularTickets(4);
         $categories = $this->categoryRepository->getAllCategories();
         $sellers = $this->sellerRepository->getAllSellers();
-        $popularTickets = $this->ticketRepository->getPopularTickets(4);
         $newTickets = $this->ticketRepository->getAllNewTickets();
 
-        return compact('categories', 'popularTickets', 'newTickets');
+        return compact('popularTickets','categories', 'sellers', 'newTickets');
     }
 }
